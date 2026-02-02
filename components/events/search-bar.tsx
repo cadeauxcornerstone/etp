@@ -13,6 +13,7 @@ interface SearchBarProps {
   className?: string;
   placeholder?: string;
 }
+export default SearchBar;
 
 export function SearchBar({ 
   className,
