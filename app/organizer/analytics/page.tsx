@@ -178,22 +178,23 @@ export default function AnalyticsPage() {
             <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis
                     dataKey="month"
-                    stroke="hsl(var(--muted-foreground))"
+                    stroke="var(--muted-foreground)"
                     fontSize={12}
                   />
                   <YAxis
-                    stroke="hsl(var(--muted-foreground))"
+                    stroke="var(--muted-foreground)"
                     fontSize={12}
                     tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`}
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
+                      backgroundColor: "var(--card)",
+                      border: "1px solid var(--border)",
                       borderRadius: "8px",
+                      color: "var(--foreground)",
                     }}
                     formatter={(value: number) => [
                       `${value.toLocaleString()} RWF`,
@@ -203,9 +204,9 @@ export default function AnalyticsPage() {
                   <Line
                     type="monotone"
                     dataKey="revenue"
-                    stroke="hsl(var(--accent))"
+                    stroke="var(--accent)"
                     strokeWidth={2}
-                    dot={{ fill: "hsl(var(--accent))", strokeWidth: 2 }}
+                    dot={{ fill: "var(--accent)", strokeWidth: 2 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -222,24 +223,25 @@ export default function AnalyticsPage() {
             <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={ticketSalesData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
                   <XAxis
                     dataKey="name"
-                    stroke="hsl(var(--muted-foreground))"
+                    stroke="var(--muted-foreground)"
                     fontSize={12}
                   />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                  <YAxis stroke="var(--muted-foreground)" fontSize={12} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
+                      backgroundColor: "var(--card)",
+                      border: "1px solid var(--border)",
                       borderRadius: "8px",
+                      color: "var(--foreground)",
                     }}
                     formatter={(value: number) => [`${value} tickets`, "Sold"]}
                   />
                   <Bar
                     dataKey="sold"
-                    fill="hsl(var(--accent))"
+                    fill="var(--accent)"
                     radius={[4, 4, 0, 0]}
                   />
                 </BarChart>
@@ -275,9 +277,10 @@ export default function AnalyticsPage() {
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
+                      backgroundColor: "var(--card)",
+                      border: "1px solid var(--border)",
                       borderRadius: "8px",
+                      color: "var(--foreground)",
                     }}
                     formatter={(value: number) => [`${value}%`, "Share"]}
                   />

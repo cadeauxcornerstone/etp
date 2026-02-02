@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react"
-
-import { useState } from "react";
+import React, { useState, useEffect } from "react"; // Added useEffect here
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -43,10 +41,12 @@ function OrganizerNav() {
   const { user, logout, setMockUser } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Auto-set organizer for demo
-  if (!user || user.role !== "organizer") {
-    setMockUser("organizer");
-  }
+  // FIXED: Wrapped in useEffect to prevent rendering error
+  useEffect(() => {
+    if (!user || user.role !== "organizer") {
+      setMockUser("organizer");
+    }
+  }, [user, setMockUser]);
 
   return (
     <>
