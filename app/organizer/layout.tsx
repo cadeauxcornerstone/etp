@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react"; // Added useEffect here
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
 import {
-  Ticket,
   LayoutDashboard,
   Calendar,
   BarChart3,
@@ -41,7 +41,7 @@ function OrganizerNav() {
   const { user, logout, setMockUser } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // FIXED: Wrapped in useEffect to prevent rendering error
+  // Auto-set organizer for demo
   useEffect(() => {
     if (!user || user.role !== "organizer") {
       setMockUser("organizer");
@@ -56,10 +56,14 @@ function OrganizerNav() {
           {/* Logo */}
           <div className="flex h-16 items-center gap-2 border-b border-border px-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-                <Ticket className="h-5 w-5 text-accent-foreground" />
-              </div>
-              <span className="text-xl font-bold tracking-tight">Tikiti</span>
+              <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                width={100} 
+                height={40} 
+                className="h-9 w-auto object-contain invert"
+                priority
+              />
             </Link>
           </div>
 
@@ -121,7 +125,8 @@ function OrganizerNav() {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/">
-                    <Ticket className="mr-2 h-4 w-4" />
+                    {/* Replaced Ticket icon with simple text or generic icon as fallback, logo already at top */}
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
                     Browse Events
                   </Link>
                 </DropdownMenuItem>
@@ -139,10 +144,13 @@ function OrganizerNav() {
       {/* Mobile Header */}
       <header className="lg:hidden sticky top-0 z-50 flex h-16 items-center justify-between border-b border-border bg-card px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-            <Ticket className="h-5 w-5 text-accent-foreground" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">Tikiti</span>
+          <Image 
+            src="/logo.svg" 
+            alt="itike" 
+            width={100} 
+            height={40} 
+            className="h-8 w-auto object-contain invert"
+          />
         </Link>
 
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
