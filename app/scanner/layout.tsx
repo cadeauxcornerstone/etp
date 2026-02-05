@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react"
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -78,10 +77,14 @@ export default function ScannerLayout({
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex items-center justify-between h-14 px-4">
           <Link href="/scanner" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-              <QrCode className="h-4 w-4 text-accent-foreground" />
-            </div>
-            <span className="font-semibold text-lg">Scanner</span>
+            <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                width={100} 
+                height={40} 
+                className="h-8 w-auto object-contain invert"
+                priority
+              />
           </Link>
 
           <DropdownMenu>
