@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link";
-import { Ticket } from "lucide-react";
+import Image from "next/image";
 import { AuthProvider } from "@/lib/auth-context";
 
 export default function AuthLayout({
@@ -17,10 +17,15 @@ export default function AuthLayout({
           <div className="relative z-10 flex flex-col justify-between p-12 w-full">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
-                <Ticket className="h-6 w-6 text-accent-foreground" />
-              </div>
-              <span className="text-2xl font-bold tracking-tight">Tikiti</span>
+              <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                width={0} 
+                height={0}
+                sizes="100vw"
+                // Made much bigger here: h-32
+                className="h-32 w-auto object-contain invert"
+              />
             </Link>
 
             {/* Content */}
@@ -52,7 +57,7 @@ export default function AuthLayout({
 
             {/* Footer */}
             <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Tikiti. Rwanda&apos;s trusted event platform.
+              &copy; {new Date().getFullYear()} itike. Rwanda&apos;s trusted event platform.
             </p>
           </div>
         </div>
@@ -61,11 +66,15 @@ export default function AuthLayout({
         <div className="flex-1 flex flex-col">
           {/* Mobile Header */}
           <div className="lg:hidden p-6 border-b border-border">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-                <Ticket className="h-5 w-5 text-accent-foreground" />
-              </div>
-              <span className="text-xl font-bold tracking-tight">Tikiti</span>
+            <Link href="/" className="flex items-center gap-2 h-12">
+              <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                width={0} 
+                height={0}
+                sizes="100vw"
+                className="h-full w-auto object-contain invert"
+              />
             </Link>
           </div>
 
