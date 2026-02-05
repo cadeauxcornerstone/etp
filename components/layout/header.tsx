@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -52,25 +53,40 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <nav className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-              <Ticket className="h-5 w-5 text-accent-foreground" />
+    /* 
+       HEADER HEIGHT: set to h-32 (128px) 
+       This is a very tall header specifically to support your vertical logo.
+    */
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-32 flex items-center">
+      <div className="container mx-auto px-4 h-full">
+        <nav className="flex h-full items-center justify-between">
+          
+          {/* 
+              LOGO SECTION 
+              - py-4: adds padding top/bottom
+              - scale-150: Increases the actual rendered size of the SVG by 50%
+              - origin-left: ensures it stays pinned to the left while growing
+          */}
+          <Link href="/" className="relative flex items-center h-full py-4 overflow-visible">
+            <div className="relative h-full w-32 flex items-center justify-center">
+              <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                fill
+                className="object-contain invert scale-150 origin-center"
+                priority 
+              />
             </div>
-            <span className="text-xl font-bold tracking-tight">Tikiti</span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Centered vertically in the tall header */}
           <div className="hidden md:flex md:items-center md:gap-8">
             {publicNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-foreground",
+                  "text-base font-semibold transition-colors hover:text-foreground",
                   pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground"
@@ -81,7 +97,7 @@ export function Header() {
             ))}
           </div>
 
-          {/* Location & Auth */}
+          {/* Location & Auth - Right Aligned */}
           <div className="hidden md:flex md:items-center md:gap-4">
             <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
               <MapPin className="h-4 w-4" />
@@ -93,10 +109,10 @@ export function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
-                      <User className="h-4 w-4" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary">
+                      <User className="h-5 w-5" />
                     </div>
-                    <span className="max-w-[100px] truncate">
+                    <span className="max-w-[120px] truncate font-medium">
                       {user?.firstName}
                     </span>
                     <ChevronDown className="h-3 w-3" />
@@ -116,20 +132,6 @@ export function Header() {
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
-                  {user?.role === "attendee" && (
-                    <DropdownMenuItem asChild>
-                      <Link href="/my-tickets" className="gap-2">
-                        <Ticket className="h-4 w-4" />
-                        My Tickets
-                      </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem asChild>
-                    <Link href="/settings" className="gap-2">
-                      <Settings className="h-4 w-4" />
-                      Settings
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={logout} className="gap-2 text-destructive">
                     <LogOut className="h-4 w-4" />
@@ -138,43 +140,50 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" asChild>
+              <div className="flex items-center gap-3">
+                <Button variant="ghost" asChild>
                   <Link href="/auth/signin">Sign In</Link>
                 </Button>
-                <Button size="sm" asChild>
+                <Button className="px-6" asChild>
                   <Link href="/auth/signup">Sign Up</Link>
                 </Button>
               </div>
             )}
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Button */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
                 {mobileMenuOpen ? (
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 ) : (
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-6 w-6" />
                 )}
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs">
-              <div className="flex flex-col gap-6 pt-6">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">Kigali, Rwanda</span>
+              <div className="flex flex-col gap-8 pt-10">
+                <div className="flex items-center justify-center h-24">
+                   <Link href="/" onClick={() => setMobileMenuOpen(false)} className="h-full">
+                    <Image 
+                      src="/logo.svg" 
+                      alt="itike" 
+                      width={100} 
+                      height={100} 
+                      className="h-full w-auto object-contain invert scale-125"
+                    />
+                  </Link>
                 </div>
 
-                <nav className="flex flex-col gap-4">
+                <nav className="flex flex-col gap-6 items-center">
                   {publicNavItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        "text-lg font-medium transition-colors",
+                        "text-xl font-bold transition-colors",
                         pathname === item.href
                           ? "text-foreground"
                           : "text-muted-foreground"
@@ -185,72 +194,17 @@ export function Header() {
                   ))}
                 </nav>
 
-                <div className="border-t border-border pt-6">
-                  {isAuthenticated ? (
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
-                          <User className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="font-medium">
-                            {user?.firstName} {user?.lastName}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {user?.email}
-                          </p>
-                        </div>
-                      </div>
-                      <Link
-                        href={getDashboardLink()}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 text-muted-foreground"
-                      >
-                        <LayoutDashboard className="h-4 w-4" />
-                        Dashboard
+                <div className="border-t border-border pt-8 flex flex-col gap-4">
+                   <Button asChild className="w-full h-12 text-lg">
+                      <Link href="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
+                        Sign Up
                       </Link>
-                      {user?.role === "attendee" && (
-                        <Link
-                          href="/my-tickets"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-2 text-muted-foreground"
-                        >
-                          <Ticket className="h-4 w-4" />
-                          My Tickets
-                        </Link>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          logout();
-                          setMobileMenuOpen(false);
-                        }}
-                        className="flex items-center gap-2 text-destructive"
-                      >
-                        <LogOut className="h-4 w-4" />
-                        Sign Out
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-3">
-                      <Button asChild className="w-full">
-                        <Link
-                          href="/auth/signup"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Sign Up
-                        </Link>
-                      </Button>
-                      <Button variant="outline" asChild className="w-full bg-transparent">
-                        <Link
-                          href="/auth/signin"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          Sign In
-                        </Link>
-                      </Button>
-                    </div>
-                  )}
+                    </Button>
+                    <Button variant="outline" asChild className="w-full h-12 text-lg bg-transparent">
+                      <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
+                        Sign In
+                      </Link>
+                    </Button>
                 </div>
               </div>
             </SheetContent>
