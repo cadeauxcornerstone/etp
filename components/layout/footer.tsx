@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Ticket, MapPin, Phone, Mail } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const footerLinks = {
   discover: [
@@ -36,10 +37,13 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-                <Ticket className="h-5 w-5 text-accent-foreground" />
-              </div>
-              <span className="text-xl font-bold tracking-tight">Tikiti</span>
+              <Image 
+                src="/logo.svg" 
+                alt="itike" 
+                width={160} 
+                height={80} 
+                className="h-20 w-auto object-contain invert"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Rwanda&apos;s trusted event ticketing platform. Discover amazing events,
@@ -56,7 +60,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>hello@tikiti.rw</span>
+                <span>hello@itike.rw</span>
               </div>
             </div>
           </div>
@@ -130,7 +134,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Tikiti. All rights reserved.
+            &copy; {new Date().getFullYear()} itike. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">
