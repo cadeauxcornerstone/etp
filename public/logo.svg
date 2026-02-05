@@ -1,0 +1,24 @@
+<svg
+  width="1200"
+  height="1200"
+  viewBox="0 0 1200 1200"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Itike marketing graphic"
+>
+  <rect width="1200" height="1200" fill="#F7F8FA"/>
+  <text x="600" y="220" text-anchor="middle" font-size="96" font-weight="600" letter-spacing="-1"
+    fill="#16233A" font-family="Inter, Helvetica, Arial, sans-serif">Your way in</text>
+  <g fill="#16233A" opacity="0.85">
+    <rect x="520" y="360" width="12" height="300" rx="2"/>
+    <rect x="550" y="360" width="8" height="300" rx="2"/>
+    <rect x="575" y="360" width="16" height="300" rx="2"/>
+    <rect x="605" y="360" width="6" height="300" rx="2"/>
+    <rect x="625" y="360" width="12" height="300" rx="2"/>
+    <rect x="650" y="360" width="8" height="300" rx="2"/>
+  </g>
+  <text x="600" y="740" text-anchor="middle" font-size="56" font-weight="500"
+    fill="#16233A" font-family="Inter, Helvetica, Arial, sans-serif">itike</text>
+  <text x="600" y="790" text-anchor="middle" font-size="28" font-weight="400" letter-spacing="1"
+    fill="#6B7280" font-family="Inter, Helvetica, Arial, sans-serif">Digital event access</text>
+</svg>
